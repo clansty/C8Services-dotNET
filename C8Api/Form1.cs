@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServiceStack.Redis;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,23 +18,54 @@ namespace C8Api
         {
             InitializeComponent();
             SetProcessDPIAware();
-            notifyIcon1.Visible = true;
         }
 
         private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
         {
             Show();
+            var a = "语文：\n";
+            using (var rds=new RedisClient("101.132.178.136"))
+            {
+                var date = DateTime.Now.ToShortDateString();
+                a += rds.GetValueFromHash("zy" + date, "c");
+                a += "\n";
+                a += "数学：\n";
+                a += rds.GetValueFromHash("zy" + date, "m");
+                a += "\n";
+                a += "英语：\n";
+                a += rds.GetValueFromHash("zy" + date, "e");
+                a += "\n";
+                a += "物理：\n";
+                a += rds.GetValueFromHash("zy" + date, "p");
+                a += "\n";
+                a += "生物：\n";
+                a += rds.GetValueFromHash("zy" + date, "b");
+            }
+            label1.Text = a;
         }
-
-        private void Form1_Shown(object sender, EventArgs e)
-        {
-            
-        }
-
-
 
         [DllImport("user32.dll")]
         internal static extern bool SetProcessDPIAware();
 
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            Hide();
         }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Hide();
+            e.Cancel = true;
+        }
+
+        private void 刷新ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            notifyIcon1_MouseClick(null, null);
+        }
+
+        private void 编辑作业ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
 }
