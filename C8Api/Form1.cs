@@ -18,30 +18,14 @@ namespace C8Api
         {
             InitializeComponent();
             SetProcessDPIAware();
+            string baseAddress = "http://127.0.0.1:8308/";
+            Microsoft.Owin.Hosting.WebApp.Start<Startup>(url: baseAddress);
         }
 
         private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
         {
             Show();
-            var a = "语文：\n";
-            using (var rds=new RedisClient("101.132.178.136"))
-            {
-                var date = DateTime.Now.ToShortDateString();
-                a += rds.GetValueFromHash("zy" + date, "c");
-                a += "\n";
-                a += "数学：\n";
-                a += rds.GetValueFromHash("zy" + date, "m");
-                a += "\n";
-                a += "英语：\n";
-                a += rds.GetValueFromHash("zy" + date, "e");
-                a += "\n";
-                a += "物理：\n";
-                a += rds.GetValueFromHash("zy" + date, "p");
-                a += "\n";
-                a += "生物：\n";
-                a += rds.GetValueFromHash("zy" + date, "b");
-            }
-            label1.Text = a;
+            label1.Text = new Homework().ToString();
         }
 
         [DllImport("user32.dll")]
@@ -65,7 +49,7 @@ namespace C8Api
 
         private void 编辑作业ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            new FrmEdit().Show();
         }
     }
 }

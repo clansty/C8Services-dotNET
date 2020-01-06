@@ -163,9 +163,14 @@ namespace QYPlugin
                 string s = doc.GetText();
                 doc.Dispose();
                 Robot.Send.Group("117076933", "英语作业：\n" + s);
-                
+                using (var rds = new RedisClient("101.132.178.136", 6379, "qVAo9C1tCbD2PEiR"))
+                {
+                    var date = DateTime.Now.ToShortDateString();
+                    rds.SetEntryInHash("zy" + date, "e", loc + @"\quiz.docx");
+                }
+    
                 if (File.Exists(loc + @"\quiz.docx"))
-                    using (var rds = new RedisClient("101.132.178.136"))
+                    using (var rds = new RedisClient("101.132.178.136", 6379, "qVAo9C1tCbD2PEiR"))
                     {
                         rds.SetEntryInHash("loc", "quiz", loc + @"\quiz.docx");
                     }

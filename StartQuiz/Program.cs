@@ -9,7 +9,7 @@ namespace StartQuiz
         static void Main(string[] args)
         {
             string l;
-            using (RedisClient rds = new RedisClient("101.132.178.136"))
+            using (RedisClient rds = new RedisClient("101.132.178.136", 6379, "qVAo9C1tCbD2PEiR"))
             {
                 l = rds.GetValueFromHash("loc", "quiz");
             }
