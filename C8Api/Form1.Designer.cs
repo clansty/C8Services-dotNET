@@ -89,6 +89,7 @@
             this.打印ToolStripMenuItem.Name = "打印ToolStripMenuItem";
             this.打印ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.打印ToolStripMenuItem.Text = "打印";
+            this.打印ToolStripMenuItem.Click += new System.EventHandler(this.打印ToolStripMenuItem_Click);
             // 
             // Form1
             // 

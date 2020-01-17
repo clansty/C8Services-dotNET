@@ -51,5 +51,10 @@ namespace C8Api
         {
             new FrmEdit().Show();
         }
+
+        private void 打印ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new FrmPrint(label1.Text).Show();
+        }
     }
 }

@@ -22,8 +22,8 @@ namespace C8Api
                 textBox1.Text = rds.GetValueFromHash("zy" + date, "c");
                 textBox2.Text = rds.GetValueFromHash("zy" + date, "m");
                 textBox3.Text = rds.GetValueFromHash("zy" + date, "e");
-                textBox4.Text = rds.GetValueFromHash("zy" + date, "p");
-                textBox5.Text = rds.GetValueFromHash("zy" + date, "b");
+                textBox5.Text = rds.GetValueFromHash("zy" + date, "p");
+                textBox4.Text = rds.GetValueFromHash("zy" + date, "b");
             }
         }
 
@@ -35,8 +35,8 @@ namespace C8Api
                 rds.SetEntryInHash("zy" + date, "c", textBox1.Text);
                 rds.SetEntryInHash("zy" + date, "m", textBox2.Text);
                 rds.SetEntryInHash("zy" + date, "e", textBox3.Text);
-                rds.SetEntryInHash("zy" + date, "p", textBox4.Text);
-                rds.SetEntryInHash("zy" + date, "b", textBox5.Text);
+                rds.SetEntryInHash("zy" + date, "p", textBox5.Text);
+                rds.SetEntryInHash("zy" + date, "b", textBox4.Text);
             }
         }
     }

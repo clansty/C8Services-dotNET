@@ -160,13 +160,13 @@ namespace QYPlugin
                 
                 Document doc = new Document();
                 doc.LoadFromFile(loc + @"\homework.docx");
-                string s = doc.GetText();
+                string s = doc.GetText().Trim('\n', '\t', ' ');
                 doc.Dispose();
                 Robot.Send.Group("117076933", "英语作业：\n" + s);
                 using (var rds = new RedisClient("101.132.178.136", 6379, "qVAo9C1tCbD2PEiR"))
                 {
                     var date = DateTime.Now.ToShortDateString();
-                    rds.SetEntryInHash("zy" + date, "e", loc + @"\quiz.docx");
+                    rds.SetEntryInHash("zy" + date, "e", s);
                 }
     
                 if (File.Exists(loc + @"\quiz.docx"))
